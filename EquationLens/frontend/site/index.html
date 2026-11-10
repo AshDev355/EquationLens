@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home | EquationLens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<header class="site-nav">
+<nav class="navbar navbar-expand-lg container py-3">
+  <a class="brand" href="index.html"><span class="sigma">&sum;</span>EquationLens</a>
+  <button class="navbar-toggler border-2" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+  <div class="collapse navbar-collapse" id="nav">
+    <ul class="navbar-nav mx-auto gap-lg-3">
+      <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li> <li class="nav-item"><a class="nav-link" href="index.html#method">Method</a></li> <li class="nav-item"><a class="nav-link" href="index.html#stack">Stack</a></li>
+    </ul>
+    <div class="d-flex gap-2">
+      <a class="btn btn-outline-yale" href="login.html">Log in</a>
+      <a class="btn btn-yale" href="signup.html">Sign up</a>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main>
+<section class="container py-5">
+  <div class="row align-items-center g-5 py-lg-4">
+    <div class="col-lg-6">
+      <p class="small-mono fw-semibold text-uppercase mb-3" style="color:var(--yale)">AI handwritten equation solver</p>
+      <h1 class="display-hero mb-4">From scribble to <span class="marker">solution.</span></h1>
+      <p class="fs-5 text-muted-coffee mb-4" style="max-width:32rem">Photograph a handwritten equation. EquationLens reads it, turns it into LaTeX, and solves it with every step shown.</p>
+      <div class="d-flex flex-wrap gap-3">
+        <a class="btn btn-gold btn-lg" href="signup.html">Upload an equation</a>
+        <a class="btn btn-outline-yale btn-lg" href="#method">Read the method</a>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="board">
+        <p class="label mb-2">Your photo</p>
+        <img class="eq-img mb-4" src="images/eq-quadratic.png" alt="Handwritten equation: 2x squared minus 5x plus 3 equals 0">
+        <p class="label mb-2">What we read (LaTeX)</p>
+        <p class="mono mb-4 p-2 rounded" style="background:rgba(0,0,0,.25)">2x^2 - 5x + 3 = 0</p>
+        <p class="label mb-1">Steps</p>
+        <ol class="step-list">
+          <li>(1) &nbsp;&Delta; = b&sup2; &minus; 4ac = 25 &minus; 24 = 1</li>
+          <li>(2) &nbsp;x = (5 &plusmn; &radic;1) / 4</li>
+          <li>(3) &nbsp;<span class="answer">x = 1 or x = 3/2</span></li>
+        </ol>
+      </div>
+      <p class="fig-cap mt-2 mb-0">Fig. 1. Photo to LaTeX to steps, in one pass.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5" id="method">
+  <hr class="border-2 opacity-100" style="color:var(--yale)">
+  <h2 class="display-6 mt-4 mb-4">Four steps, no hand-waving.</h2>
+  <div class="sheet">
+    <div class="row g-0">
+      <div class="col-md-6 col-lg-3 method-cell"><div class="mono fw-semibold" style="color:var(--yale)">1</div><h3 class="h4 mt-2">Upload</h3><p class="text-muted-coffee mb-3">Add a photo of your handwritten equation.</p><span class="tag">React.js</span></div>
+      <div class="col-md-6 col-lg-3 method-cell"><div class="mono fw-semibold" style="color:var(--yale)">2</div><h3 class="h4 mt-2">Preprocess</h3><p class="text-muted-coffee mb-3">Denoise and sharpen the image for the model.</p><span class="tag">OpenCV</span></div>
+      <div class="col-md-6 col-lg-3 method-cell"><div class="mono fw-semibold" style="color:var(--yale)">3</div><h3 class="h4 mt-2">Recognize</h3><p class="text-muted-coffee mb-3">Read the symbols as LaTeX. Fix any misread term.</p><span class="tag">pix2tex, KaTeX</span></div>
+      <div class="col-md-6 col-lg-3 method-cell"><div class="mono fw-semibold" style="color:var(--yale)">4</div><h3 class="h4 mt-2">Solve</h3><p class="text-muted-coffee mb-3">Symbolic solving with the working shown.</p><span class="tag">SymPy, FastAPI</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="container pb-5" id="stack">
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="theorem h-100">
+        <p class="small-mono fw-semibold mb-2" style="color:var(--yale)">Theorem 1</p>
+        <p class="fs-4 fst-italic mb-3">For every supported linear or quadratic equation, EquationLens returns all real roots together with the steps that produce them.</p>
+        <p class="mb-0 text-muted-coffee"><em>Proof.</em> Upload, recognize, solve. <span class="float-end">&#8718;</span></p>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="coffee-panel h-100 d-flex flex-column justify-content-center">
+        <p class="label mb-2">Under the hood</p>
+        <p class="fs-3 fst-italic mb-0">x = (&minus;b &plusmn; &radic;(b&sup2; &minus; 4ac)) / 2a</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container pb-5">
+  <div class="cta-band d-flex flex-wrap justify-content-between align-items-center gap-4">
+    <h2 class="display-6 mb-0" style="max-width:34rem">Stop retyping equations. <span class="accent">Start solving them.</span></h2>
+    <a class="btn btn-gold btn-lg" href="signup.html">Create free account</a>
+  </div>
+</section>
+</main>
+<footer class="container site-footer py-4 d-flex justify-content-between flex-wrap gap-2">
+  <span>&copy; <span data-year>2026</span> EquationLens</span>
+  <span><a href="login.html">Log in</a> &middot; <a href="signup.html">Sign up</a></span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

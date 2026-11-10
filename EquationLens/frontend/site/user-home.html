@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My workspace | EquationLens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<header class="site-nav">
+<nav class="navbar navbar-expand-lg container py-3">
+  <a class="brand" href="user-home.html"><span class="sigma">&sum;</span>EquationLens</a>
+  <div class="ms-auto d-flex align-items-center gap-3">
+    <span class="small-mono text-end"><span class="d-block fw-semibold">Amna Khan</span><span class="text-muted-coffee">User</span></span>
+    <a class="btn btn-outline-yale" href="login.html">Log out</a>
+  </div>
+</nav>
+</header>
+
+<main class="container py-4">
+  <h1 class="display-6 mb-1">Hello, Amna.</h1>
+  <p class="text-muted-coffee mb-4">Upload an equation, check what we read, then solve it.</p>
+
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="sheet sheet-pad h-100">
+        <h2 class="h4 mb-3">1. Upload</h2>
+        <label class="dropzone d-block mb-3" id="dropzone" for="fileInput">
+          <span class="d-block fw-semibold" style="color:var(--yale)">Drop an image here, or click to choose</span>
+          <span class="small-mono text-muted-coffee">PNG or JPG, one equation per image</span>
+          <input class="visually-hidden" id="fileInput" type="file" accept="image/png,image/jpeg">
+        </label>
+        <p class="small-mono mb-2" style="color:var(--yale)">Preview</p>
+        <img id="previewImg" class="eq-img" src="images/eq-quadratic.png" alt="Preview of the uploaded equation image">
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="sheet sheet-pad mb-4">
+        <h2 class="h4 mb-3">2. Check what we read</h2>
+        <label class="form-label" for="latex">Recognized equation (LaTeX). Edit if something is wrong.</label>
+        <input class="form-control mono mb-3" id="latex" type="text" value="2x^2 - 5x + 3 = 0">
+        <button class="btn btn-gold" id="solveBtn" type="button">Solve this equation</button>
+      </div>
+      <div class="board">
+        <h2 class="h4 mb-3">3. Solution</h2>
+        <p id="solutionEmpty" class="mb-0">Press &ldquo;Solve this equation&rdquo; to see the steps here.</p>
+        <div id="solutionSteps" class="d-none">
+          <ol class="step-list mb-0">
+            <li>(1) &nbsp;a = 2, b = &minus;5, c = 3</li>
+            <li>(2) &nbsp;&Delta; = b&sup2; &minus; 4ac = 25 &minus; 24 = 1</li>
+            <li>(3) &nbsp;x = (5 &plusmn; &radic;1) / 4</li>
+            <li>(4) &nbsp;<span class="answer">x = 1 or x = 3/2</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="sheet sheet-pad">
+        <div class="d-flex justify-content-between align-items-baseline mb-2">
+          <h2 class="h4 mb-0">Recent equations</h2>
+          <a href="#" id="clearHistory" class="small-mono">Clear history</a>
+        </div>
+        <div class="history-item">
+          <img src="images/eq-linear.png" alt="Handwritten equation: 3x plus 7 equals 22">
+          <div class="flex-grow-1"><div class="mono">3x + 7 = 22</div><div class="small text-muted-coffee">Linear, solved today</div></div>
+          <span class="answer">x = 5</span>
+        </div>
+        <div class="history-item">
+          <img src="images/eq-factor.png" alt="Handwritten equation: x squared minus 9 equals 0">
+          <div class="flex-grow-1"><div class="mono">x^2 - 9 = 0</div><div class="small text-muted-coffee">Quadratic, solved yesterday</div></div>
+          <span class="answer">x = &plusmn;3</span>
+        </div>
+        <div class="history-item">
+          <img src="images/eq-square.png" alt="Handwritten equation: x squared plus 4x plus 4 equals 0">
+          <div class="flex-grow-1"><div class="mono">x^2 + 4x + 4 = 0</div><div class="small text-muted-coffee">Quadratic, solved 3 days ago</div></div>
+          <span class="answer">x = &minus;2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="container site-footer py-4 d-flex justify-content-between flex-wrap gap-2">
+  <span>&copy; <span data-year>2026</span> EquationLens</span>
+  <span><a href="login.html">Log in</a> &middot; <a href="signup.html">Sign up</a></span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
