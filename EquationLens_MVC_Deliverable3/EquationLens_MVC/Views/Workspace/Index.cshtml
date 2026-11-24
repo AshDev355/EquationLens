@@ -1,0 +1,57 @@
+@model WorkspaceViewModel
+@{ ViewData["Title"] = "My workspace"; }
+
+<main class="container py-4" id="workspace"
+      data-recognize-url="@Url.Action("Recognize", "Workspace")"
+      data-solve-url="@Url.Action("Solve", "Workspace")"
+      data-history-url="@Url.Action("History", "Workspace")"
+      data-steps-url="@Url.Action("Steps", "Workspace")"
+      data-delete-url="@Url.Action("Delete", "Workspace")"
+      data-clear-url="@Url.Action("ClearHistory", "Workspace")">
+    @Html.AntiForgeryToken()
+
+    <h1 class="display-6 mb-1">Hello, @Model.FullName.</h1>
+    <p class="text-muted-coffee mb-4">Upload a photo or type an equation, review it, and keep your solutions in one place.</p>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="sheet sheet-pad h-100">
+                <h2 class="h4 mb-3">1. Upload</h2>
+                <label class="dropzone d-block mb-3" id="dropzone" for="fileInput">
+                    <span class="d-block fw-semibold" style="color:var(--yale)">Drop an image here, or click to choose</span>
+                    <span class="small-mono text-muted-coffee">PNG or JPG, up to 5 MB</span>
+                    <input class="visually-hidden" id="fileInput" type="file" accept="image/png,image/jpeg">
+                </label>
+                <img id="previewImg" class="eq-img" src="~/images/eq-quadratic.png" alt="Preview of the chosen equation image">
+                <p id="recognizeNote" class="small text-muted-coffee mt-2 mb-0" aria-live="polite"></p>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="sheet sheet-pad mb-4">
+                <h2 class="h4 mb-3">2. Check the equation</h2>
+                <label class="form-label" for="equation">Linear or quadratic equation in x. Edit it if anything is wrong.</label>
+                <input class="form-control mono mb-3" id="equation" maxlength="300" placeholder="2x^2 - 5x + 3 = 0" autocomplete="off">
+                <input type="hidden" id="source" value="typed">
+                <button class="btn btn-gold" id="solveBtn" type="button">Solve this equation</button>
+            </div>
+            <div class="board">
+                <h2 class="h4 mb-3">3. Solution</h2>
+                <p id="solutionMessage" class="mb-0" aria-live="polite">Solve an equation to see the steps here.</p>
+                <ol id="solutionSteps" class="step-list mb-0"></ol>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="sheet sheet-pad">
+                <div class="d-flex justify-content-between align-items-baseline mb-2">
+                    <h2 class="h4 mb-0">Recent equations</h2>
+                    <button type="button" id="clearBtn" class="btn btn-sm btn-outline-yale">Clear history</button>
+                </div>
+                <div id="historyList"><partial name="_History" model="Model.History" /></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts { <script src="~/js/workspace.js"></script> }

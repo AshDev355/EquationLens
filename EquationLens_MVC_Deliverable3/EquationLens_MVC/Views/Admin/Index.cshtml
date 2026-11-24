@@ -1,0 +1,46 @@
+@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin overview";
+    Layout = "_AdminLayout";
+}
+
+@section AdminActions {
+    <button type="button" class="btn btn-sm btn-outline-yale" id="refreshActivity">Refresh activity</button>
+}
+
+<main class="container py-4" id="adminPage"
+      data-users-url="@Url.Action("UsersTable", "Admin")"
+      data-activity-url="@Url.Action("ActivityFeed", "Admin")">
+    <h1 class="display-6 mb-1">Admin overview</h1>
+    <p class="text-muted-coffee mb-4">Live totals from the application database.</p>
+
+    <div class="sheet mb-4">
+        <div class="row g-0">
+            <div class="col-md-6 stat"><div class="num">@Model.UserCount</div><div class="text-muted-coffee">Registered users</div></div>
+            <div class="col-md-6 stat"><div class="num">@Model.EquationCount</div><div class="text-muted-coffee">Equations solved</div></div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="sheet">
+                <div class="sheet-pad pb-2 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <h2 class="h4 mb-0">Registered accounts</h2>
+                    <div>
+                        <label class="visually-hidden" for="userSearch">Search users</label>
+                        <input class="form-control" id="userSearch" type="search" placeholder="Search name or email" autocomplete="off">
+                    </div>
+                </div>
+                <div id="usersTable"><partial name="_UsersTable" model="Model.Users" /></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="board h-100">
+                <h2 class="h4 mb-3">Recent activity</h2>
+                <div id="activityList"><partial name="_Activity" model="Model.Activity" /></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts { <script src="~/js/admin.js"></script> }

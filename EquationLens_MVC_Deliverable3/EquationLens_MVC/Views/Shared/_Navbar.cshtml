@@ -1,0 +1,39 @@
+@{
+    var signedIn = User.Identity?.IsAuthenticated == true;
+    var displayName = User.FindFirst("FullName")?.Value ?? User.Identity?.Name;
+}
+<header class="site-nav">
+    <nav class="navbar navbar-expand-lg container py-3">
+        <a class="brand" asp-controller="Home" asp-action="Index"><span class="sigma">&sum;</span>EquationLens</a>
+        <button class="navbar-toggler border-2" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav mx-auto gap-lg-3">
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                @if (signedIn)
+                {
+                    <li class="nav-item"><a class="nav-link" asp-controller="Workspace" asp-action="Index">My workspace</a></li>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="Index">Admin</a></li>
+                }
+            </ul>
+            <div class="d-flex gap-2 align-items-center">
+                @if (signedIn)
+                {
+                    <span class="small-mono">@displayName</span>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button class="btn btn-outline-yale" type="submit">Log out</button>
+                    </form>
+                }
+                else
+                {
+                    <a class="btn btn-outline-yale" asp-controller="Account" asp-action="Login">Log in</a>
+                    <a class="btn btn-yale" asp-controller="Account" asp-action="Register">Sign up</a>
+                }
+            </div>
+        </div>
+    </nav>
+</header>

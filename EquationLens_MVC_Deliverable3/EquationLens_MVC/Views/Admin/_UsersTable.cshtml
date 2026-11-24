@@ -1,0 +1,28 @@
+@model UsersPageViewModel
+<div class="table-responsive">
+    <table class="table">
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th><th class="text-end">Solved</th></tr></thead>
+        <tbody>
+        @if (Model.Items.Count == 0)
+        {
+            <tr><td colspan="4" class="text-muted-coffee">No users match “@Model.Term”.</td></tr>
+        }
+        @foreach (var user in Model.Items)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td><span class="badge-role @(user.Role == "Admin" ? "admin" : "")">@user.Role</span></td>
+                <td class="text-end mono">@user.Solved</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<div class="sheet-pad pt-2 d-flex justify-content-between align-items-center">
+    <span class="small-mono text-muted-coffee">Page @Model.Page of @Model.TotalPages &middot; @Model.Total users</span>
+    <div class="d-flex gap-2">
+        <button type="button" class="btn btn-sm btn-outline-yale" data-page="@(Model.Page - 1)" disabled="@(Model.Page <= 1)">Previous</button>
+        <button type="button" class="btn btn-sm btn-outline-yale" data-page="@(Model.Page + 1)" disabled="@(Model.Page >= Model.TotalPages)">Next</button>
+    </div>
+</div>

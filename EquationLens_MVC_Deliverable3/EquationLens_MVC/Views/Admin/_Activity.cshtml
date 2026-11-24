@@ -1,0 +1,19 @@
+@model IReadOnlyList<ActivityLog>
+@if (Model.Count == 0)
+{
+    <p class="mb-0">No activity yet.</p>
+}
+else
+{
+    <ul class="list-unstyled mb-0">
+        @foreach (var item in Model)
+        {
+            var who = item.UserName ?? "Deleted user";
+            var detail = string.IsNullOrEmpty(item.Detail) ? "" : " (" + item.Detail + ")";
+            <li class="mb-3">
+                <span class="label">@item.CreatedAt.ToLocalTime().ToString("dd MMM, hh:mm tt")</span><br>
+                <span>@who: @item.Action@detail</span>
+            </li>
+        }
+    </ul>
+}

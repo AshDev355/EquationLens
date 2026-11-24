@@ -1,0 +1,17 @@
+@* Nested layout: wraps the main layout and adds an admin toolbar. *@
+@{ Layout = "_Layout"; }
+
+<div class="container pt-3">
+    <div class="admin-bar d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <span class="small-mono fw-semibold">Admin area</span>
+        <div class="d-flex gap-2">
+            @await RenderSectionAsync("AdminActions", required: false)
+        </div>
+    </div>
+</div>
+
+@RenderBody()
+
+@* Pass the child view's sections up to _Layout *@
+@section Styles { @await RenderSectionAsync("Styles", required: false) }
+@section Scripts { @await RenderSectionAsync("Scripts", required: false) }

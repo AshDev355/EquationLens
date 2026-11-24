@@ -1,0 +1,23 @@
+@model IReadOnlyList<EquationRecord>
+@if (Model.Count == 0)
+{
+    <p class="text-muted-coffee mb-0">No saved equations yet. Solve your first equation above.</p>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <div class="history-item flex-wrap">
+            <div class="flex-grow-1">
+                <div class="mono">@item.Equation @if (item.Source == "image") { <span class="badge-role ms-1">from image</span> }</div>
+                <div class="small text-muted-coffee">Solved @item.CreatedAt.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")</div>
+                <ol class="step-list small mt-2 mb-0" id="steps-@item.Id" hidden></ol>
+            </div>
+            <span class="answer">@item.Result</span>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-yale" data-steps-id="@item.Id">Steps</button>
+                <button type="button" class="btn btn-sm btn-outline-yale" data-delete-id="@item.Id" aria-label="Delete @item.Equation">Delete</button>
+            </div>
+        </div>
+    }
+}
